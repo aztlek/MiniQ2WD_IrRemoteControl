@@ -12,7 +12,7 @@ program. Some of the additional features are:
 ## The robot
 
 The MiniQ 2WD robot is based on an Arduino Leonardo. It is manufactured by
-DfRobot [https://www.dfrobot.com] and its product page is [https://www.dfrobot.com/product-555.html].
+DfRobot https://www.dfrobot.com and its product page is https://www.dfrobot.com/product-555.html.
 According to the manufacturer:
 
 > This upgraded version of MiniQ 2WD Kit comes with new Arduino Leonardo
@@ -31,6 +31,30 @@ Also according to the manufacturer's features they are:
   avoidance. Also includes an IR remote control to easily control its features
   remotely
 * I2C port(Gadgeteer) for communicate with other devices
+
+## Install IRremote library
+
+This program uses the * IRremote * library whose original page
+is https://z3t0.github.io/Arduino-IRremote/. But * MiniQ2WD_IrRemoteControl*
+uses the version found on the product page https://www.dfrobot.com/product-555.html
+in the title * Documents * in the link [IR Remote control sample code](https://github.com/Arduinolibrary/DFRobot_MiniQ_2WD_V2.0_ROB0081/raw/master/IR_Remote_Control.rar).
+
+To install the library, follow these steps:
+
+### Install in Debian Stretch (9)
+
+In shell:
+
+```bash
+su -
+wget https://github.com/Arduinolibrary/DFRobot_MiniQ_2WD_V2.0_ROB0081/raw/master/IR_Remote_Control.rar
+unrar-free IR_Remote_Control.rar
+cd IR_Remote_Control/library/
+cp -r IRremote /usr/share/arduino/libraries
+```
+
+In Arduino IDE 2.1.0.5 (version in Debian Stretch): ```arduino Sketch -> Import library -> Add library```.
+Select the library in ```/usr/share/arduino/libraries```
 
 ## License
 
