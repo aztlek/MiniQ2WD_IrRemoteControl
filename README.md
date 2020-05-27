@@ -9,7 +9,30 @@ program. Some of the additional features are:
 * Turns can also be done when the robot is moving forward, backward, or stopped.
 * The speed of the robot can be increased and decreased.
 
-# License
+## The robot
+
+The MiniQ 2WD robot is based on an Arduino Leonardo. It is manufactured by
+DfRobot [https://www.dfrobot.com] and its product page is [https://www.dfrobot.com/product-555.html].
+According to the manufacturer:
+
+> This upgraded version of MiniQ 2WD Kit comes with new Arduino Leonardo
+  controller but also integrates useful modules such as buzzer, RGB LED,
+  photosensitive diode, infrared LED receiver and compass.
+
+###  Features
+
+Also according to the manufacturer's features they are:
+
+* ​Micro USB for download the code(bootloader: Leonardo)
+* A compass inside
+* WS2812 RGB LED for controlling the color by only one pin
+* Soft buttons for giving you more comfortable feeling
+* Two Infrared transmitters and 1 infrared receiver for obstacle detection and
+  avoidance. Also includes an IR remote control to easily control its features
+  remotely
+* I2C port(Gadgeteer) for communicate with other devices
+
+## License
 
 Copyright (C) 2020 Luis Alejandro Bernal Romero (Aztlek)
 
