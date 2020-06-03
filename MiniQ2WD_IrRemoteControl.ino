@@ -56,7 +56,7 @@
 #define FORW 0//go forward
 #define BACK 1//go back
 
-// IR control
+// IR control constants
 #define IR_IN  17//IR receiver pin
 
 IRrecv irrecv(IR_IN);
@@ -80,27 +80,18 @@ void motor_control(int right_motor_dir, int speed_right_motor, int left_motor_di
 
 void dump(decode_results *results)
 {
-  Serial.print("results->value = ");
-  Serial.println(results->value);
-
   switch(results->value) {
     case PLAY_STOP_BUTTOM:
-      // STOP
+      // Stop
       velocity = 0;
       break;
     case VOL_PLUS_BUTTON:
-      // FORWARD
+      // Increase speed
       velocity += DELTA_V;
-      if(velocity > MAX_VELOCITY) {
-        velocity = MAX_VELOCITY;
-      }
       break;
     case VOL_MINUS_BUTTON:
-      // BACKWARD
+      // Decrease speed
       velocity -= DELTA_V;
-      if(velocity < -MAX_VELOCITY) {
-        velocity = -MAX_VELOCITY;
-      }
       break;
     case BACKWARD_BUTTON:
       // Turn Left
@@ -113,15 +104,18 @@ void dump(decode_results *results)
       delay(50);
       break;
   }
+  velocity = constrain(velocity, -MAX_VELOCITY, MAX_VELOCITY);
 
   Serial.print("velocity = ");
   Serial.println(velocity);
 
   if(velocity >=  0) {
-        motor_control(FORW, velocity, FORW, velocity);// forward or stop
+    // forward or stop
+    motor_control(FORW, velocity, FORW, velocity);
   }
   else if(velocity < 0) {
-        motor_control(BACK, -velocity, BACK, -velocity);// backward
+    // backward
+    motor_control(BACK, -velocity, BACK, -velocity);
   }
 }
 
@@ -133,11 +127,14 @@ void setup()
   pinMode(LEFT_MOTOR_PIN, OUTPUT);
   pinMode(LEFT_MOTOR_DIRECTION_PIN, OUTPUT);
 
+  // Init IR control
   irrecv.enableIRIn();
 
+  // Init serial port
   Serial.begin(9600);
   
-  motor_control(FORW,0,FORW,0);//run motor
+  // Init motors
+  motor_control(FORW, 0, FORW, 0);//run motor
 }
 
 void loop()
