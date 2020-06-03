@@ -133,17 +133,16 @@ void setup()
   irrecv.enableIRIn();
 
   Serial.begin(9600);
+  
+  motor_control(FORW,0,FORW,0);//run motor
 }
 
 void loop()
 {
-  motor_control(FORW,0,FORW,0);//run motor
-  while(1)
-  {
+  
    if(irrecv.decode(&results))
    {
       dump(&results);
       irrecv.resume();
    }
-  }
 }
