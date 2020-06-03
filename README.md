@@ -56,6 +56,11 @@ cp -r IRremote /usr/share/arduino/libraries
 In Arduino IDE 2.1.0.5 (version in Debian Stretch): ```arduino Sketch -> Import library -> Add library```.
 Select the library in ```/usr/share/arduino/libraries```
 
+## Miniq is an Arduino
+
+The MiniQ 2WD robot is a Leonardo Arduino. Therefore you have to configure it as
+such in the Arduino IDE. To do this select ```Tools -> Board -> Arduino Leonardo```.
+
 ## License
 
 Copyright (C) 2020 Luis Alejandro Bernal Romero (Aztlek)
