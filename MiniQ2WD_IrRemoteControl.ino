@@ -22,9 +22,15 @@
  * is achieved with this program is much more complete than the example robot
  * program. Some of the additional features are:
  *
- * The turns of the robot are more controllable.
- * Turns can also be done when the robot is moving forward, backward, or stopped.
- * The speed of the robot can be increased and decreased.
+ * - The turns of the robot are more controllable.
+ * - Turns can also be done when the robot is moving forward, backward, or stopped.
+ * - The speed of the robot can be increased and decreased.
+ *
+ * Miniq is an Arduino
+ * -------------------
+ *
+ * The MiniQ 2WD robot is a Leonardo Arduino. Therefore you have to configure it as
+ * such in the Arduino IDE. To do this select Tools -> Board -> Arduino Leonardo.
  */
 
 #include <IRremote.h>
@@ -40,7 +46,6 @@
 #define VOL_PLUS_BUTTON 0x00fd807f
 #define VOL_MINUS_BUTTON 0x00fd906f
 #define PLAY_STOP_BUTTOM 0XfdA05f
-
 
 // Motor constants
 #define RIGHT_MOTOR_PIN 6
@@ -71,6 +76,7 @@ void motor_control(int right_motor_dir, int speed_right_motor, int left_motor_di
   digitalWrite(LEFT_MOTOR_DIRECTION_PIN, left_motor_dir);
   analogWrite(LEFT_MOTOR_PIN, speed_left_motor);
 }
+
 
 void dump(decode_results *results)
 {
@@ -111,11 +117,8 @@ void dump(decode_results *results)
   Serial.print("velocity = ");
   Serial.println(velocity);
 
-  if(velocity == 0) {
-        motor_control(FORW, 0, FORW, 0);// stop
-  }
-  else if(velocity >  0) {
-        motor_control(FORW, velocity, FORW, velocity);// forward
+  if(velocity >=  0) {
+        motor_control(FORW, velocity, FORW, velocity);// forward or stop
   }
   else if(velocity < 0) {
         motor_control(BACK, -velocity, BACK, -velocity);// backward
@@ -139,7 +142,6 @@ void setup()
 
 void loop()
 {
-  
    if(irrecv.decode(&results))
    {
       dump(&results);
